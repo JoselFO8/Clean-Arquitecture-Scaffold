@@ -5,6 +5,8 @@ import { GET_USERS_SERVICE ,IGetUsersService } from "@/domain/use-cases/get-user
 import { IUpdateUserService, UPDATE_USER_SERVICE } from "@/domain/use-cases/update-user-service";
 import {Mapping, Get, Adapter, Post, Body, Param, Put} from "@tsclean/core";
 
+import { MiddlewareValidatorInsertData } from "../helpers/decorators/class-validator";
+
 @Mapping('api/v1/add-user')
 export class AddUserController {
 
@@ -17,17 +19,11 @@ export class AddUserController {
     
     // Example function
     @Get()
+    // @MiddlewareValidatorInsertData(@Body() data: AddUserParams)
+    // @MiddlewareValidatorInsertData()
     async getUsersController() {
-        console.log("getUsersController");
-        
         return await this.getUsersService.getUsersService();
     } 
-
-    // @Get("/:id")
-    // async getUserController(@Param() id: AddUserParams): Promise<UserModel> {
-    //     console.log("getUserController");
-    //     return await this.getUserService.getUserService(id);
-    // } 
 
     @Get("/:id")
     async getUserController(@Param() id: {id: string}): Promise<UserModel> {
