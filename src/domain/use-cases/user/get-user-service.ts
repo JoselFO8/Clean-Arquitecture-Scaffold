@@ -1,4 +1,4 @@
-import { AddUserParams, UserModel } from "../models/user";
+import { AddUserParams, UserModel } from "../../models/user";
 
 export const GET_USER_SERVICE = "GET_USER_SERVICE";
 

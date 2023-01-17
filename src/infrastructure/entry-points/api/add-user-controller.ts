@@ -1,8 +1,8 @@
 import { AddUserParams, UserModel } from "@/domain/models/user";
-import { ADD_USER_SERVICE, IAddUserService } from "@/domain/use-cases/add-user-service";
-import { GET_USER_SERVICE, IGetUserService } from "@/domain/use-cases/get-user-service";
-import { GET_USERS_SERVICE ,IGetUsersService } from "@/domain/use-cases/get-users-service";
-import { IUpdateUserService, UPDATE_USER_SERVICE } from "@/domain/use-cases/update-user-service";
+import { ADD_USER_SERVICE, IAddUserService } from "@/domain/use-cases/user/add-user-service";
+import { GET_USER_SERVICE, IGetUserService } from "@/domain/use-cases/user/get-user-service";
+import { GET_USERS_SERVICE ,IGetUsersService } from "@/domain/use-cases/user/get-users-service";
+import { IUpdateUserService, UPDATE_USER_SERVICE } from "@/domain/use-cases/user/update-user-service";
 import {Mapping, Get, Adapter, Post, Body, Param, Put} from "@tsclean/core";
 
 import { MiddlewareValidatorInsertData } from "../helpers/decorators/class-validator";

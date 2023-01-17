@@ -1,5 +1,5 @@
 import {Adapter, Service} from "@tsclean/core";
-import {IAddPaymentIntentService} from "@/domain/use-cases/add-payment-intent-service";
+import {IAddPaymentIntentService} from "@/domain/use-cases/payment-intent/add-payment-intent-service";
 import { ADD_PAYMENT_INTENT_REPOSITORY, IAddPaymentIntentRepository } from "@/domain/models/contracts/payment-intent/add-payment-intent-repository";
 import { PaymentIntentModel } from "@/domain/models/payment-intent";
 

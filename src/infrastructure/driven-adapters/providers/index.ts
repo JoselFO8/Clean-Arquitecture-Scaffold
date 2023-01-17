@@ -3,18 +3,18 @@ import { ADD_USER_REPOSITORY } from "@/domain/models/contracts/user/add-user-rep
 import { GET_USER_REPOSITORY } from "@/domain/models/contracts/user/get-user-repository";
 import { GET_USERS_REPOSITORY } from "@/domain/models/contracts/user/get-users-repository";
 import { UPDATE_USER_REPOSITORY } from "@/domain/models/contracts/user/update-user-repository";
-import { ADD_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/add-payment-intent-service";
-import { ADD_USER_SERVICE } from "@/domain/use-cases/add-user-service";
-import { GET_USER_SERVICE } from "@/domain/use-cases/get-user-service";
-import { GET_USERS_SERVICE } from "@/domain/use-cases/get-users-service";
-import { AddPaymentIntentServiceImpl } from "@/domain/use-cases/impl/add-payment-intent-service-impl";
+import { ADD_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/add-payment-intent-service";
+import { ADD_USER_SERVICE } from "@/domain/use-cases/user/add-user-service";
+import { GET_USER_SERVICE } from "@/domain/use-cases/user/get-user-service";
+import { GET_USERS_SERVICE } from "@/domain/use-cases/user/get-users-service";
+import { AddPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/add-payment-intent-service-impl";
 import { AddUserServiceImpl } from "@/domain/use-cases/impl/user/add-user-service-impl";
 import { GetUserServiceImpl } from "@/domain/use-cases/impl/user/get-user-service-impl";
 import { GetUsersServiceImpl } from "@/domain/use-cases/impl/user/get-users-service-impl";
 import { UpdateUserServiceImpl } from "@/domain/use-cases/impl/user/update-user-service-impl";
 
 
-import { UPDATE_USER_SERVICE } from "@/domain/use-cases/update-user-service";
+import { UPDATE_USER_SERVICE } from "@/domain/use-cases/user/update-user-service";
 import { UserMongooseRepositoryAdapter } from "@/infrastructure/driven-adapters/adapters/orm/mongoose/user-mongoose-repository-adapter";
 import { PaymentIntentMongooseRepositoryAdapter } from "../adapters/orm/mongoose/payment-intent-mongoose-repository-adapter";
 

@@ -1,5 +1,5 @@
 import { AddUserParams, UserModel } from "@/domain/models/user";
-import { GET_USER_SERVICE, IGetUserService } from "@/domain/use-cases/get-user-service";
+import { GET_USER_SERVICE, IGetUserService } from "@/domain/use-cases/user/get-user-service";
 import {Mapping, Get, Param, Adapter} from "@tsclean/core";
 
 @Mapping('api/v1/get-user')

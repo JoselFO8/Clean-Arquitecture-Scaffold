@@ -2,7 +2,7 @@ import {Adapter, Service} from "@tsclean/core";
 
 import { GET_USER_REPOSITORY, IGetUserRepository } from "@/domain/models/contracts/user/get-user-repository";
 import { AddUserParams, UserModel } from "@/domain/models/user";
-import { IGetUserService } from "../../get-user-service";
+import { IGetUserService } from "../../user/get-user-service";
 
 @Service()
 export class GetUserServiceImpl implements IGetUserService {

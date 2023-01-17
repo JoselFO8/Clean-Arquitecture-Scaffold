@@ -1,5 +1,5 @@
 import { PaymentIntentModel } from "@/domain/models/payment-intent";
-import { ADD_PAYMENT_INTENT_SERVICE, IAddPaymentIntentService } from "@/domain/use-cases/add-payment-intent-service";
+import { ADD_PAYMENT_INTENT_SERVICE, IAddPaymentIntentService } from "@/domain/use-cases/payment-intent/add-payment-intent-service";
 import {Adapter, Body, Get, Mapping, Post} from "@tsclean/core";
 
 @Mapping('payment-intent')
