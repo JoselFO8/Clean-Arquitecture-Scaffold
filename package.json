@@ -5,8 +5,7 @@
    "scripts": {
       "start": "node ./dist/index.js",
       "build": "rimraf dist && tsc -p tsconfig-build.json",
-      "watch": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts",
-      "dev": "nodemon ./src/index.ts"
+      "watch": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts"
    },
    "dependencies": {
       "@tsclean/core": "^1.7.0",

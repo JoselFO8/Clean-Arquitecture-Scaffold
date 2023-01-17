@@ -10,6 +10,6 @@ export class AddPaymentIntentServiceImpl implements IAddPaymentIntentService {
     ) {}
 
     async addPaymentIntentService(data: PaymentIntentModel): Promise<any> {
-        return await this.addPaymentIntentRepository.addPaymentIntentRepository(data)
+        return this.addPaymentIntentRepository.addPaymentIntentRepository(data)
     }
 }

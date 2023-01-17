@@ -13,27 +13,14 @@ export class PaymentIntentController {
         return "Prueba desde PaymentIntentController"
     }
 
-    // @Post()
-    // async addPaymentIntentController(@Body() data: PaymentIntentModel): Promise<void> {
-    //     this.addPaymentIntentService.addPaymentIntentService(data);
-    //     return 
-    // }
-
     @Post()
     async addPaymentIntentController(@Body() data: any): Promise<any> {
-        // try {
-        //     console.log("Prueba nodemon JLF");
-        //     console.log(data);
-        //     this.addPaymentIntentService.addPaymentIntentService(data);
-        //     return data
-        // } catch (error) {
-        //     return error
-        // }
-        
-        // console.log("Prueba nodemon JLF");
-        // console.log(data);
-        const paymentIntentResult = await this.addPaymentIntentService.addPaymentIntentService(data);
-        
-        return paymentIntentResult
+        try {
+            const payment = await this.addPaymentIntentService.addPaymentIntentService(data);
+            return {error: false, msg: "SUCCESSFUL_TRANSFER", data: payment}
+        } catch (error) {
+            console.log(error);
+            return {error: true, msg: `PAYMENT_INTENT_ERROR: ${error}`, data: null} 
+        }
     }
 }
