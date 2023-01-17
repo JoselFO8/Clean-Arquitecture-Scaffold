@@ -1,12 +1,13 @@
 import {Adapter, Service} from "@tsclean/core";
 import {AddUserParams, UserModel} from "@/domain/models/user";
-import {IAddUserService} from "@/domain/use-cases/add-user-service";
-import {ADD_USER_REPOSITORY, IAddUserRepository} from "@/domain/models/contracts/add-user-repository";
+
+import { ADD_USER_REPOSITORY, IAddUserRepository } from "@/domain/models/contracts/user/add-user-repository";
+import { IAddUserService } from "../../add-user-service";
 
 @Service()
 export class AddUserServiceImpl implements IAddUserService {
     constructor(
-        @Adapter(ADD_USER_REPOSITORY) private readonly addUserRepository: IAddUserRepository
+        @Adapter(ADD_USER_REPOSITORY ) private readonly addUserRepository: IAddUserRepository
     ) {}
 
     async addUserService(data: AddUserParams): Promise<UserModel> {

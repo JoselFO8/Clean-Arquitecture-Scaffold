@@ -13,14 +13,23 @@ export class PaymentIntentController {
         return "Prueba desde PaymentIntentController"
     }
 
-    @Post()
-    async addPaymentIntentController(@Body() data: any): Promise<any> {
-        try {
-            const payment = await this.addPaymentIntentService.addPaymentIntentService(data);
-            return {error: false, msg: "SUCCESSFUL_TRANSFER", data: payment}
-        } catch (error) {
-            console.log(error);
-            return {error: true, msg: `PAYMENT_INTENT_ERROR: ${error}`, data: null} 
-        }
-    }
+    // @Post()
+    // async addPaymentIntentController(@Body() data: any): Promise<any> {
+    //     try {
+    //         const payment = await this.addPaymentIntentService.addPaymentIntentService(data);
+    //         return {error: false, msg: "SUCCESSFUL_TRANSFER", data: payment}
+    //     } catch (error) {
+    //         console.log(error);
+    //         return {error: true, msg: `PAYMENT_INTENT_ERROR: ${error}`, data: null} 
+    //     }
+    // }
+
+    // @Post()
+    // async addPaymentIntentController(@Body() data: any) => {
+    //     try {
+    //         const paymentIntentResult = 
+    //     } catch (error) {
+            
+    //     }
+    // }
 }

@@ -1,4 +1,5 @@
-import { AddUserParams, UserModel } from "../user";
+import { UserModel } from "../../user";
+
 
 export const GET_USER_REPOSITORY = "GET_USER_REPOSITORY";
 

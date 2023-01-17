@@ -1,7 +1,8 @@
 import {Adapter, Service} from "@tsclean/core";
-import {IUpdateUserService} from "@/domain/use-cases/update-user-service";
-import { IUpdateUserRepository, UPDATE_USER_REPOSITORY } from "@/domain/models/contracts/update-user-repository";
+
 import { AddUserParams, UserModel } from "@/domain/models/user";
+import { IUpdateUserRepository, UPDATE_USER_REPOSITORY } from "@/domain/models/contracts/user/update-user-repository";
+import { IUpdateUserService } from "../../update-user-service";
 
 @Service()
 export class UpdateUserServiceImpl implements IUpdateUserService {

@@ -1,4 +1,4 @@
-import { PaymentIntentModel } from "../payment-intent";
+import { PaymentIntentModel } from "../../payment-intent";
 
 export const ADD_PAYMENT_INTENT_REPOSITORY = "ADD_PAYMENT_INTENT_REPOSITORY"; 
 

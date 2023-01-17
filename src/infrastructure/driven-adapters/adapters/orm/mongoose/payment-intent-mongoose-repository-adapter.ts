@@ -1,5 +1,5 @@
 import { API_KEY } from "@/application/config/environment";
-import { IAddPaymentIntentRepository } from "@/domain/models/contracts/add-payment-intent-repository";
+import { IAddPaymentIntentRepository } from "@/domain/models/contracts/payment-intent/add-payment-intent-repository";
 import {PaymentIntentModel} from "@/domain/models/payment-intent";
 import { Stripe } from "stripe";
 

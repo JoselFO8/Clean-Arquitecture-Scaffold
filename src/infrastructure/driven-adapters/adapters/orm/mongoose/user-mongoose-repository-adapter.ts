@@ -1,4 +1,5 @@
-import { IAddUserRepository } from "@/domain/models/contracts/add-user-repository";
+
+import { IAddUserRepository } from "@/domain/models/contracts/user/add-user-repository";
 import {AddUserParams, UserModel} from "@/domain/models/user";
 import {UserModelSchema} from "@/infrastructure/driven-adapters/adapters/orm/mongoose/models/user";
 
