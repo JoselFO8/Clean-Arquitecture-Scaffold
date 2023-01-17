@@ -16,7 +16,8 @@ import { UpdateUserServiceImpl } from "@/domain/use-cases/impl/user/update-user-
 
 import { UPDATE_USER_SERVICE } from "@/domain/use-cases/user/update-user-service";
 import { UserMongooseRepositoryAdapter } from "@/infrastructure/driven-adapters/adapters/orm/mongoose/user-mongoose-repository-adapter";
-import { PaymentIntentMongooseRepositoryAdapter } from "../adapters/orm/mongoose/payment-intent-mongoose-repository-adapter";
+// import { PaymentIntentMongooseRepositoryAdapter } from "../adapters/orm/mongoose/payment-intent-mongoose-repository-adapter";
+import { StripeAdapter } from "../adapters/payments/stripe-adapter";
 
 export const adapters = [
     // User
@@ -37,9 +38,13 @@ export const adapters = [
         useClass: UserMongooseRepositoryAdapter
     },
     // Payment-Intent
+    // {
+    //     provide: ADD_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: PaymentIntentMongooseRepositoryAdapter
+    // },
     {
         provide: ADD_PAYMENT_INTENT_REPOSITORY,
-        useClass: PaymentIntentMongooseRepositoryAdapter
+        useClass: StripeAdapter
     },
 ];
 
