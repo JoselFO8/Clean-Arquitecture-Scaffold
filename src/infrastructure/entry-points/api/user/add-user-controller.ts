@@ -5,7 +5,7 @@ import { GET_USERS_SERVICE ,IGetUsersService } from "@/domain/use-cases/user/get
 import { IUpdateUserService, UPDATE_USER_SERVICE } from "@/domain/use-cases/user/update-user-service";
 import {Mapping, Get, Adapter, Post, Body, Param, Put} from "@tsclean/core";
 
-import { MiddlewareValidatorInsertData } from "../helpers/decorators/class-validator";
+import { MiddlewareValidatorInsertData } from "../../helpers/decorators/class-validator";
 
 @Mapping('api/v1/add-user')
 export class AddUserController {
