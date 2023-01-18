@@ -1,10 +1,12 @@
 import { ADD_PAYMENT_INTENT_SERVICE, IAddPaymentIntentService } from "@/domain/use-cases/payment-intent/add-payment-intent-service";
-import {Adapter, Body, Get, Mapping, Post} from "@tsclean/core";
+import { CONFIRM_PAYMENT_INTENT_SERVICE, IConfirmPaymentIntentService } from "@/domain/use-cases/payment-intent/confirm-payment-intent-service";
+import {Adapter, Body, Get, Mapping, Param, Post} from "@tsclean/core";
 
 @Mapping('payment-intent')
 export class PaymentIntentController {
     constructor(
-        @Adapter(ADD_PAYMENT_INTENT_SERVICE) private readonly addPaymentIntentService: IAddPaymentIntentService
+        @Adapter(ADD_PAYMENT_INTENT_SERVICE) private readonly addPaymentIntentService: IAddPaymentIntentService,
+        @Adapter(CONFIRM_PAYMENT_INTENT_SERVICE) private readonly confirmPaymentIntentService: IConfirmPaymentIntentService
     ) {}
 
     @Get()
@@ -15,10 +17,22 @@ export class PaymentIntentController {
     @Post()
     async addPaymentIntentController(@Body() data: any): Promise<any> {
         try {
-            const paymentIntentResult = await this.addPaymentIntentService.addPaymentIntentService(data);
-            return {error: false, msg: "SUCCESSFUL_PAYMENT_INTENT", data: paymentIntentResult}
+            const result = await this.addPaymentIntentService.addPaymentIntentService(data);
+            return {error: false, msg: "SUCCESSFUL_PAYMENT_INTENT", data: result}
         } catch (error) {
             return {error: true, msg: `PAYMENT_INTENT_ERROR: ${error}`, data: null} 
+        }
+    }
+
+    @Post("/confirm/:id")
+    async confirmPaymentIntentController(@Body() body: any, @Param() {id}: any): Promise<any> {
+        try {
+            console.log(body, id);
+            
+            const result = await this.confirmPaymentIntentService.confirmPaymentIntentService(body, id) ;
+            return {error: false, msg: "SUCCESSFUL_CONFIRMATION_PAYMENT_INTENT", data: result}
+        } catch (error) {
+            return {error: true, msg: `CONFIRMATION_PAYMENT_INTENT_ERROR: ${error}`, data: null} 
         }
     }
 }

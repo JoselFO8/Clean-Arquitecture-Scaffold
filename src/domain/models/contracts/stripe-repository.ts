@@ -12,7 +12,7 @@ export const STRIPE_REPOSITORIES = {
 // }
 
 export interface IAddPaymentIntentRepository { addPaymentIntentRepository: (data: any) => Promise<any> }
-export interface IConfirmPaymentIntentRepository { confirmPaymentIntentRepository: (data: any) => Promise<any> }
+export interface IConfirmPaymentIntentRepository { confirmPaymentIntentRepository: (body: any, id: any) => Promise<any> }
 
 
 

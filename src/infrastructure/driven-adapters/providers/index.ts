@@ -18,6 +18,9 @@ import { UPDATE_USER_SERVICE } from "@/domain/use-cases/user/update-user-service
 import { UserMongooseRepositoryAdapter } from "@/infrastructure/driven-adapters/adapters/orm/mongoose/user-mongoose-repository-adapter";
 // import { PaymentIntentMongooseRepositoryAdapter } from "../adapters/orm/mongoose/payment-intent-mongoose-repository-adapter";
 import { StripeAdapter } from "../adapters/payments/stripe-adapter";
+import { CONFIRM_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/confirm-payment-intent-repository";
+import { CONFIRM_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/confirm-payment-intent-service";
+import { ConfirmPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/confirm-payment-intent-service-impl";
 
 export const adapters = [
     // User
@@ -46,6 +49,10 @@ export const adapters = [
         provide: ADD_PAYMENT_INTENT_REPOSITORY,
         useClass: StripeAdapter
     },
+    {
+        provide: CONFIRM_PAYMENT_INTENT_REPOSITORY,
+        useClass: StripeAdapter
+    },
 ];
 
 export const services = [
@@ -70,5 +77,9 @@ export const services = [
     {
         provide: ADD_PAYMENT_INTENT_SERVICE,
         useClass: AddPaymentIntentServiceImpl
+    },
+    {
+        provide: CONFIRM_PAYMENT_INTENT_SERVICE,
+        useClass: ConfirmPaymentIntentServiceImpl
     },
 ]
