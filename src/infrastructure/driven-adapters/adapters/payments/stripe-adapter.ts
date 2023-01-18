@@ -23,7 +23,7 @@ export class StripeAdapter implements
      * Crear intento de pago
      * Enviar secret key
      * @param data Recibe parametros por body para crear intento de pago
-     * @returns Objeto intento de pago 
+     * @returns Objeto intento de pago | error
      */
     async addPaymentIntentRepository(data: PaymentIntentModel): Promise<any> {
         const newPaymentIntent = await axios.post(
@@ -38,7 +38,7 @@ export class StripeAdapter implements
      * Recuperar un intento de pago
      * Enviar secret key
      * @param id Recibe id especifico de intento de pago
-     * @returns Objeto intento de pago | nulo
+     * @returns Objeto intento de pago | error
      */
     async retrievePaymentIntentRepository(id: any): Promise<any> {
         const retrievePaymentIntent = await axios.get(
@@ -53,7 +53,7 @@ export class StripeAdapter implements
      * Enviar secret key
      * @param body Recibe parametros por body a actualizar
      * @param id Recibe id especifico de intento de pago
-     * @returns Objeto intento de pago actualizado | nulo
+     * @returns Objeto intento de pago actualizado | error
      */
     async updatePaymentIntentRepository(body: PaymentIntentModel, id: PaymentIntentModel): Promise<PaymentIntentModel> {
         console.log(body, id.id);
@@ -71,7 +71,7 @@ export class StripeAdapter implements
      * Enviar secret key
      * @param body Recibe forma de pago por body
      * @param id Recibe id especifico de intento de pago
-     * @returns Objeto intento de pago | nulo
+     * @returns Objeto intento de pago | error
      */
     async confirmPaymentIntentRepository(body: any, id: any): Promise<any> {
         const confirmPaymentIntent = await axios.post(
@@ -80,5 +80,21 @@ export class StripeAdapter implements
             this.config
         )
         return confirmPaymentIntent.data
+    }
+    
+    /**
+     * Capturar intento de pago
+     * Enviar secret key
+     * @param body Recibe parametros para la captura por body
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago | error
+     */
+    async capturePaymentIntentRepository(body: any, id: any): Promise<any> {
+        const capturePaymentIntent = await axios.post(
+            `${this.stripeUrl}/payment_intents/${id.id}/capture`,
+            QueryString.stringify(body),
+            this.config
+        )
+        return capturePaymentIntent.data
     }
 }
