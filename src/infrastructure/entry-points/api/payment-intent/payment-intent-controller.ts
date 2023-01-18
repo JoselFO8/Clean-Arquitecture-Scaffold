@@ -68,7 +68,7 @@ export class PaymentIntentController {
      * @returns Objeto intento de pago | nulo
      */
     @Post("/confirm/:id")
-    async confirmPaymentIntentController(@Body() body: PaymentIntentModel, @Param() {id}: PaymentIntentModel): Promise<ResponsePaymentIntent> {
+    async confirmPaymentIntentController(@Body() body: PaymentIntentModel, @Param() id: PaymentIntentModel): Promise<ResponsePaymentIntent> {
         try {
             const result = await this.confirmPaymentIntentService.confirmPaymentIntentService(body, id) ;
             return {error: false, msg: "CONFIRMATION_PAYMENT_INTENT_SUCCESSFUL", data: result}

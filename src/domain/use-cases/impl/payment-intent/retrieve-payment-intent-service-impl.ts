@@ -9,7 +9,7 @@ export class RetrievePaymentIntentServiceImpl implements IRetrievePaymentIntentS
         @Adapter(RETRIEVE_PAYMENT_INTENT_REPOSITORY) private readonly retrievePaymentIntentRepository: IRetrievePaymentIntentRepository
     ) {}
 
-    async retrievePaymentIntentService(id: PaymentIntentModel): Promise<any> {
+    async retrievePaymentIntentService(id: PaymentIntentModel): Promise<PaymentIntentModel> {
         return this.retrievePaymentIntentRepository.retrievePaymentIntentRepository(id)
     } 
 }

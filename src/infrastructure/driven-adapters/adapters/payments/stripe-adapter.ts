@@ -75,7 +75,7 @@ export class StripeAdapter implements
      */
     async confirmPaymentIntentRepository(body: any, id: any): Promise<any> {
         const confirmPaymentIntent = await axios.post(
-            `${this.stripeUrl}/payment_intents/${id}/confirm`,
+            `${this.stripeUrl}/payment_intents/${id.id}/confirm`,
             QueryString.stringify(body),
             this.config
         )

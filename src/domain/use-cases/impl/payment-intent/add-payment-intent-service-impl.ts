@@ -9,7 +9,7 @@ export class AddPaymentIntentServiceImpl implements IAddPaymentIntentService {
         @Adapter(ADD_PAYMENT_INTENT_REPOSITORY) private readonly addPaymentIntentRepository: IAddPaymentIntentRepository
     ) {}
 
-    async addPaymentIntentService(data: PaymentIntentModel): Promise<any> {
-        return this.addPaymentIntentRepository.addPaymentIntentRepository(data)
+    async addPaymentIntentService(body: PaymentIntentModel): Promise<PaymentIntentModel> {
+        return this.addPaymentIntentRepository.addPaymentIntentRepository(body)
     }
 }
