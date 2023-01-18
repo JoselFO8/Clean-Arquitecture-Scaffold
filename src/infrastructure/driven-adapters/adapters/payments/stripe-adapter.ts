@@ -12,28 +12,52 @@ export class StripeAdapter implements
 {
     // Implementation
     constructor (
-        private readonly config
+        private readonly config,
+        private readonly stripeUrl
     ) {
         this.config = { headers:{ Authorization: `Bearer ${API_KEY}`} }
+        this.stripeUrl = "https://api.stripe.com/v1"
     }
-    
+
+    /**
+     * Crear intento de pago
+     * @param data Recibe parametros por body para crear intento de pago
+     * @returns Objeto intento de pago 
+     */
     async addPaymentIntentRepository(data: PaymentIntentModel): Promise<any> {
         const newPaymentIntent = await axios.post(
-            "https://api.stripe.com/v1/payment_intents",
+            `${this.stripeUrl}/payment_intents`,
             QueryString.stringify(data),
             this.config
         )
-
         return newPaymentIntent.data
     }
 
+    /**
+     * Recuperar un intento de pago
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago | nulo
+     */
+    async retrievePaymentIntentRepository(id: any): Promise<any> {
+        const retrievePaymentIntent = await axios.get(
+            `${this.stripeUrl}/payment_intents/${id}`,
+            this.config
+        )
+        return retrievePaymentIntent.data
+    }
+
+    /**
+     * Confirmar intento de pago
+     * @param body Recibe forma de pago por body
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago | nulo
+     */
     async confirmPaymentIntentRepository(body: any, id: any): Promise<any> {
         const confirmPaymentIntent = await axios.post(
-            `https://api.stripe.com/v1/payment_intents/${id}/confirm`,
+            `${this.stripeUrl}/payment_intents/${id}/confirm`,
             QueryString.stringify(body),
             this.config
-        )    
-    
+        )
         return confirmPaymentIntent.data
     }
 }
