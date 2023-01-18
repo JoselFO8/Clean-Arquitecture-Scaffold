@@ -24,9 +24,9 @@
 export type PaymentIntentModel = {
   // Attributes
   id?: number | string;
-  amount: number; // Requerido
-  currency: string; // Requerido
-  
+  amount?: number; // Requerido
+  currency?: string; // Requerido
+
   object?: string; // Verificar
   application_fee_amount?: any; // Verificar metodo?
   automatic_payment_methods?: {};
@@ -69,6 +69,10 @@ export type PaymentIntentModel = {
   status?: any;
 }
 
-  export type AddPaymentIntentParams = Omit<PaymentIntentModel, 'id'>
+export type PaymentIntentParams = Omit<PaymentIntentModel, 'id'>
 
-
+export interface ResponsePaymentIntent {
+  error: boolean;
+  msg: string;
+  data: PaymentIntentModel;
+}

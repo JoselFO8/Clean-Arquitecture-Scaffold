@@ -21,6 +21,7 @@ export class StripeAdapter implements
 
     /**
      * Crear intento de pago
+     * Enviar secret key
      * @param data Recibe parametros por body para crear intento de pago
      * @returns Objeto intento de pago 
      */
@@ -35,19 +36,39 @@ export class StripeAdapter implements
 
     /**
      * Recuperar un intento de pago
+     * Enviar secret key
      * @param id Recibe id especifico de intento de pago
      * @returns Objeto intento de pago | nulo
      */
     async retrievePaymentIntentRepository(id: any): Promise<any> {
         const retrievePaymentIntent = await axios.get(
-            `${this.stripeUrl}/payment_intents/${id}`,
+            `${this.stripeUrl}/payment_intents/${id.id}`,
             this.config
         )
         return retrievePaymentIntent.data
     }
 
     /**
+     * Actualizar intento de pago
+     * Enviar secret key
+     * @param body Recibe parametros por body a actualizar
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago actualizado | nulo
+     */
+    async updatePaymentIntentRepository(body: PaymentIntentModel, id: PaymentIntentModel): Promise<PaymentIntentModel> {
+        console.log(body, id.id);
+        
+        const updatePaymentIntent = await axios.post(
+            `${this.stripeUrl}/payment_intents/${id.id}`,
+            QueryString.stringify(body),
+            this.config
+        )
+        return updatePaymentIntent.data
+    }
+
+    /**
      * Confirmar intento de pago
+     * Enviar secret key
      * @param body Recibe forma de pago por body
      * @param id Recibe id especifico de intento de pago
      * @returns Objeto intento de pago | nulo

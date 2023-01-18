@@ -24,6 +24,9 @@ import { ConfirmPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment
 import { RETRIEVE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/retrieve-payment-intent-repository";
 import { RETRIEVE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/retrieve-payment-intent-service";
 import { RetrievePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/retrieve-payment-intent-service-impl";
+import { UPDATE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/update-payment-intent-repository";
+import { UPDATE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/update-payment-intent-service";
+import { UpdatePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/update-payment-intent-service-impl";
 
 export const adapters = [
     // User
@@ -54,6 +57,10 @@ export const adapters = [
     },
     {
         provide: RETRIEVE_PAYMENT_INTENT_REPOSITORY,
+        useClass: StripeAdapter
+    },
+    {
+        provide: UPDATE_PAYMENT_INTENT_REPOSITORY,
         useClass: StripeAdapter
     },
     {
@@ -88,6 +95,10 @@ export const services = [
     {
         provide: RETRIEVE_PAYMENT_INTENT_SERVICE,
         useClass: RetrievePaymentIntentServiceImpl
+    },
+    {
+        provide: UPDATE_PAYMENT_INTENT_SERVICE,
+        useClass: UpdatePaymentIntentServiceImpl
     },
     {
         provide: CONFIRM_PAYMENT_INTENT_SERVICE,
