@@ -18,6 +18,17 @@ export class StripeAdapter implements
         this.config = { headers:{ Authorization: `Bearer ${API_KEY}`} }
         this.stripeUrl = "https://api.stripe.com/v1"
     }
+    //* POST /v1/payment_intents
+    //* GET  /v1/payment_intents/:id
+    //* POST /v1/payment_intents/:id
+    //* POST /v1/payment_intents/:id/confirm
+    //* POST /v1/payment_intents/:id/capture
+    //* POST /v1/payment_intents/:id/cancel
+    //* GET  /v1/payment_intents
+    // POST /v1/payment_intents/:id/increment_authorization
+    // GET  /v1/payment_intents/search
+    // POST /v1/payment_intents/:id/verify_microdeposits
+    // POST /v1/payment_intents/:id/apply_customer_balance
 
     /**
      * Crear intento de pago
@@ -91,7 +102,7 @@ export class StripeAdapter implements
      */
     async capturePaymentIntentRepository(body: any, id: any): Promise<any> {
         const capturePaymentIntent = await axios.post(
-            `${this.stripeUrl}/payment_intents/${id.id}/capture`,
+            `${this.stripeUrl}/payment_intents/${id.id}`,
             QueryString.stringify(body),
             this.config
         )
@@ -112,5 +123,25 @@ export class StripeAdapter implements
             this.config
         )
         return cancelPaymentIntent.data
+    }
+
+    // https://api.stripe.com/v1/payment_intents
+
+    // CORREGIR MEDIANTE UNAFUNCION QUE DETERMINE EL QUERY Q LLEGA
+
+    /**
+     * Capturar intento de pago
+     * Enviar secret key
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago | error
+     */
+    async listAllPaymentIntentRepository(query: any): Promise<any> {
+        console.log({query});
+        
+        const listAllPaymentIntent = await axios.get(
+            `${this.stripeUrl}/payment_intents${!query && query.limit ? "" : `?limit=${query.limit}` }`,
+            this.config
+        )
+        return listAllPaymentIntent.data
     }
 }

@@ -33,6 +33,9 @@ import { CapturePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment
 import { CANCEL_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/cancel-payment-intent-repository";
 import { CANCEL_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/cancel-payment-intent-service";
 import { CancelPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/cancel-payment-intent-service-impl";
+import { LIST_ALL_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/list-all-payment-intents-repository";
+import { LIST_ALL_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/list-all-payment-intents-service";
+import { ListAllPaymentIntentsServiceImpl } from "@/domain/use-cases/impl/payment-intent/list-all-payment-intents-service-impl";
 
 export const adapters = [
     // User
@@ -81,6 +84,10 @@ export const adapters = [
         provide: CANCEL_PAYMENT_INTENT_REPOSITORY,
         useClass: StripeAdapter
     },
+    {
+        provide: LIST_ALL_PAYMENT_INTENT_REPOSITORY,
+        useClass: StripeAdapter
+    },
 ];
 
 export const services = [
@@ -125,5 +132,9 @@ export const services = [
     {
         provide: CANCEL_PAYMENT_INTENT_SERVICE,
         useClass: CancelPaymentIntentServiceImpl
+    },
+    {
+        provide: LIST_ALL_PAYMENT_INTENT_SERVICE,
+        useClass: ListAllPaymentIntentsServiceImpl
     },
 ]
