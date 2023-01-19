@@ -39,6 +39,9 @@ import { ListAllPaymentIntentsServiceImpl } from "@/domain/use-cases/impl/paymen
 import { INCREMENT_AN_AUTHORIZATION_REPOSITORY } from "@/domain/models/contracts/payment-intent/increment-an-authorization-repository";
 import { INCREMENT_AN_AUTHORIZATION_SERVICE } from "@/domain/use-cases/payment-intent/increment-an-authorization-service";
 import { IncrementAnAuthorizationServiceImpl } from "@/domain/use-cases/impl/payment-intent/increment-an-authorization-service-impl";
+import { SEARCH_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/search-payment-intent-repository";
+import { SEARCH_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/search-payment-intent-service";
+import { SearchPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/search-payment-intent-service-impl";
 
 export const adapters = [
     // User
@@ -95,6 +98,10 @@ export const adapters = [
         provide: INCREMENT_AN_AUTHORIZATION_REPOSITORY,
         useClass: StripeAdapter
     },
+    {
+        provide: SEARCH_PAYMENT_INTENT_REPOSITORY,
+        useClass: StripeAdapter
+    },
 ];
 
 export const services = [
@@ -147,5 +154,9 @@ export const services = [
     {
         provide: INCREMENT_AN_AUTHORIZATION_SERVICE,
         useClass: IncrementAnAuthorizationServiceImpl
+    },
+    {
+        provide: SEARCH_PAYMENT_INTENT_SERVICE,
+        useClass: SearchPaymentIntentServiceImpl
     },
 ]

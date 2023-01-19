@@ -163,4 +163,28 @@ export class StripeAdapter implements
         )
         return incrementAnAutorization.data
     }
+
+    // https://api.stripe.com/v1/payment_intents/search
+    /**
+     * Capturar intento de pago
+     * Enviar secret key
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago | error
+     */
+    async searchPaymentIntentRepository(query: any): Promise<any> {
+        // console.log(`${this.stripeUrl}/payment_intents/search${query}`);
+        
+        // De objeto a query strings
+        console.log(QueryString.stringify(query));
+        
+        const searchPaymentIntent = await axios.get(
+            // `${this.stripeUrl}/payment_intents/search${query ? `?${query}` : ""}`,
+            `${this.stripeUrl}/payment_intents/search?query=status:'succeeded'`,
+            this.config
+        )
+        return searchPaymentIntent.data
+        // return "pruebas desde searchPaymentIntentRepository"
+    }
+
+    
 }

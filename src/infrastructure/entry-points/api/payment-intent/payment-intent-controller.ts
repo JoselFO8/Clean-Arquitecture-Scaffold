@@ -6,6 +6,7 @@ import { CONFIRM_PAYMENT_INTENT_SERVICE, IConfirmPaymentIntentService } from "@/
 import { IIncrementAnAuthorizationService, INCREMENT_AN_AUTHORIZATION_SERVICE } from "@/domain/use-cases/payment-intent/increment-an-authorization-service";
 import { IListAllPaymentIntentsService, LIST_ALL_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/list-all-payment-intents-service";
 import { IRetrievePaymentIntentService, RETRIEVE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/retrieve-payment-intent-service";
+import { ISearchPaymentIntentService, SEARCH_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/search-payment-intent-service";
 import { IUpdatePaymentIntentService, UPDATE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/update-payment-intent-service";
 import {Adapter, Body, Get, Mapping, Param, Post, Query} from "@tsclean/core";
 
@@ -20,6 +21,7 @@ export class PaymentIntentController {
         @Adapter(CANCEL_PAYMENT_INTENT_SERVICE) private readonly cancelPaymentIntentService: ICancelPaymentIntentService,
         @Adapter(LIST_ALL_PAYMENT_INTENT_SERVICE) private readonly listAllPaymentIntentService: IListAllPaymentIntentsService,
         @Adapter(INCREMENT_AN_AUTHORIZATION_SERVICE) private readonly incrementAnAuthorizationService: IIncrementAnAuthorizationService,
+        @Adapter(SEARCH_PAYMENT_INTENT_SERVICE) private readonly searchPaymentIntentService: ISearchPaymentIntentService,
     ) {}
     
     /**
@@ -152,6 +154,23 @@ export class PaymentIntentController {
             return {error: false, msg: "INCREMENT_AN_AUTHORIZATION_SUCCESSFUL", data: result}
         } catch (error) {
             return {error: true, msg: `INCREMENT_AN_AUTHORIZATION_ERROR: ${error}`, data: null} 
+        }
+    }
+
+    /**
+     * Cancelar intento de pago
+     * @param body Pasar por body el paramatro para informar causa de cancelacion 
+     * cancellation_reason?: "duplicate" | "fraudulent" | "requested_by_customer" | "abandoned";
+     * @param id Pasar id especifico de intento de pago 
+     * @returns Objeto intento de pago | error
+     */
+    @Get("/search")
+    async searchPaymentIntentController(@Query() query: PaymentIntentModel): Promise<ResponsePaymentIntent> {
+        try {
+            const result = await this.searchPaymentIntentService.searchPaymentIntentService(query);
+            return {error: false, msg: "SEARCH_PAYMENT_INTENT_SUCCESSFUL", data: result}
+        } catch (error) {
+            return {error: true, msg: `SEARCH_PAYMENT_INTENT_ERROR: ${error}`, data: null}
         }
     }
 }
