@@ -144,4 +144,23 @@ export class StripeAdapter implements
         )
         return listAllPaymentIntent.data
     }
+
+    // https://api.stripe.com/v1/payment_intents/pi_1DsvJ12eZvKYlo2CXq3aSyxd/increment_authorization
+    
+    // async incrementAnAutorizationRepository(query: any): Promise<any> {
+    /**
+     * Confirmar intento de pago
+     * Enviar secret key
+     * @param body Recibe forma de pago por body
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago | error
+     */
+    async incrementAnAutorizationRepository(body: any, id: any): Promise<any> {
+        const incrementAnAutorization = await axios.post(
+            `${this.stripeUrl}/payment_intents/${id.id}/increment_authorization`,
+            QueryString.stringify(body),
+            this.config
+        )
+        return incrementAnAutorization.data
+    }
 }
