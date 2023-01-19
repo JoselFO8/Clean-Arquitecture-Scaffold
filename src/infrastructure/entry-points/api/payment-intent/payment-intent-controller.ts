@@ -1,5 +1,6 @@
 import { PaymentIntentModel, ResponsePaymentIntent } from "@/domain/models/payment-intent";
 import { ADD_PAYMENT_INTENT_SERVICE, IAddPaymentIntentService } from "@/domain/use-cases/payment-intent/add-payment-intent-service";
+import { CANCEL_PAYMENT_INTENT_SERVICE, ICancelPaymentIntentService } from "@/domain/use-cases/payment-intent/cancel-payment-intent-service";
 import { CAPTURE_PAYMENT_INTENT_SERVICE, ICapturePaymentIntentService } from "@/domain/use-cases/payment-intent/capture-payment-intent-service";
 import { CONFIRM_PAYMENT_INTENT_SERVICE, IConfirmPaymentIntentService } from "@/domain/use-cases/payment-intent/confirm-payment-intent-service";
 import { IRetrievePaymentIntentService, RETRIEVE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/retrieve-payment-intent-service";
@@ -14,6 +15,7 @@ export class PaymentIntentController {
         @Adapter(UPDATE_PAYMENT_INTENT_SERVICE) private readonly updatePaymentIntentService: IUpdatePaymentIntentService,
         @Adapter(CONFIRM_PAYMENT_INTENT_SERVICE) private readonly confirmPaymentIntentService: IConfirmPaymentIntentService,
         @Adapter(CAPTURE_PAYMENT_INTENT_SERVICE) private readonly capturePaymentIntentService: ICapturePaymentIntentService,
+        @Adapter(CANCEL_PAYMENT_INTENT_SERVICE) private readonly cancelPaymentIntentService: ICancelPaymentIntentService,
     ) {}
 
     /**
@@ -94,6 +96,24 @@ export class PaymentIntentController {
             return {error: false, msg: "CAPTURE_PAYMENT_INTENT_SUCCESSFUL", data: result}
         } catch (error) {
             return {error: true, msg: `CAPTURE_PAYMENT_INTENT_ERROR: ${error}`, data: null} 
+        }
+    }
+
+    // Un objeto PaymentIntent se puede cancelar cuando se encuentra en uno de estos estados: requires_payment_method requires_capture requires_confirmation requires_actionprocessing
+    /**
+     * Cancelar intento de pago
+     * @param body Pasar por body el paramatro para informar causa de cancelacion 
+     * cancellation_reason?: "duplicate" | "fraudulent" | "requested_by_customer" | "abandoned";
+     * @param id Pasar id especifico de intento de pago 
+     * @returns Objeto intento de pago | nulo
+     */
+    @Post("/cancel/:id")
+    async cancelPaymentIntentController(@Body() body: PaymentIntentModel, @Param() id: PaymentIntentModel): Promise<ResponsePaymentIntent> {
+        try {
+            const result = await this.cancelPaymentIntentService.cancelPaymentIntentService(body, id) ;
+            return {error: false, msg: "CANCEL_PAYMENT_INTENT_SUCCESSFUL", data: result}
+        } catch (error) {
+            return {error: true, msg: `CANCEL_PAYMENT_INTENT_ERROR: ${error}`, data: null} 
         }
     }
 }

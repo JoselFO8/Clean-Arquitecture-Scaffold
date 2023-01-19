@@ -97,4 +97,20 @@ export class StripeAdapter implements
         )
         return capturePaymentIntent.data
     }
+
+    /**
+     * Capturar intento de pago
+     * Enviar secret key
+     * @param body Recibe parametros para la captura por body
+     * @param id Recibe id especifico de intento de pago
+     * @returns Objeto intento de pago | error
+     */
+    async cancelPaymentIntentRepository(body: any, id: any): Promise<any> {
+        const cancelPaymentIntent = await axios.post(
+            `${this.stripeUrl}/payment_intents/${id.id}/cancel`,
+            QueryString.stringify(body),
+            this.config
+        )
+        return cancelPaymentIntent.data
+    }
 }

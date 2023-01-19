@@ -54,7 +54,7 @@ export type PaymentIntentModel = {
   amount_received?: number;
   application?: any
   canceled_at?: any;
-  cancellation_reason?: any;
+  cancellation_reason?: "duplicate" | "fraudulent" | "requested_by_customer" | "abandoned";
   client_secret?: string;
   created?: Date | number;
   invoice?: any;
