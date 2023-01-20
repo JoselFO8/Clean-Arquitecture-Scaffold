@@ -15,7 +15,7 @@ import bodyParser from 'body-parser';
 // function initConnect(uri: string): Promise<void> {
 function initConnect(uri: string): any {
     connect(uri)
-        .then(() => console.log('DB Mongo connected: ' + uri))
+        .then(() => console.log('DB Mongo connected'))
         .catch((err) => console.log(err));
 }
 

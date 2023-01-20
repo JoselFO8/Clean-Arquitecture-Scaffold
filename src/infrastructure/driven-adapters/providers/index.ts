@@ -1,13 +1,13 @@
-import { ADD_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/add-payment-intent-repository";
+// import { ADD_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/add-payment-intent-repository";
 import { ADD_USER_REPOSITORY } from "@/domain/models/contracts/user/add-user-repository";
 import { GET_USER_REPOSITORY } from "@/domain/models/contracts/user/get-user-repository";
 import { GET_USERS_REPOSITORY } from "@/domain/models/contracts/user/get-users-repository";
 import { UPDATE_USER_REPOSITORY } from "@/domain/models/contracts/user/update-user-repository";
-import { ADD_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/add-payment-intent-service";
+// import { ADD_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/add-payment-intent-service";
 import { ADD_USER_SERVICE } from "@/domain/use-cases/user/add-user-service";
 import { GET_USER_SERVICE } from "@/domain/use-cases/user/get-user-service";
 import { GET_USERS_SERVICE } from "@/domain/use-cases/user/get-users-service";
-import { AddPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/add-payment-intent-service-impl";
+// import { AddPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/add-payment-intent-service-impl";
 import { AddUserServiceImpl } from "@/domain/use-cases/impl/user/add-user-service-impl";
 import { GetUserServiceImpl } from "@/domain/use-cases/impl/user/get-user-service-impl";
 import { GetUsersServiceImpl } from "@/domain/use-cases/impl/user/get-users-service-impl";
@@ -18,30 +18,33 @@ import { UPDATE_USER_SERVICE } from "@/domain/use-cases/user/update-user-service
 import { UserMongooseRepositoryAdapter } from "@/infrastructure/driven-adapters/adapters/orm/mongoose/user-mongoose-repository-adapter";
 // import { PaymentIntentMongooseRepositoryAdapter } from "../adapters/orm/mongoose/payment-intent-mongoose-repository-adapter";
 import { StripeAdapter } from "../adapters/payments/stripe-adapter";
-import { CONFIRM_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/confirm-payment-intent-repository";
-import { CONFIRM_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/confirm-payment-intent-service";
-import { ConfirmPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/confirm-payment-intent-service-impl";
-import { RETRIEVE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/retrieve-payment-intent-repository";
-import { RETRIEVE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/retrieve-payment-intent-service";
-import { RetrievePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/retrieve-payment-intent-service-impl";
-import { UPDATE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/update-payment-intent-repository";
-import { UPDATE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/update-payment-intent-service";
-import { UpdatePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/update-payment-intent-service-impl";
-import { CAPTURE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/capture-payment-intent-repository";
-import { CAPTURE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/capture-payment-intent-service";
-import { CapturePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/capture-payment-intent-service-impl";
-import { CANCEL_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/cancel-payment-intent-repository";
-import { CANCEL_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/cancel-payment-intent-service";
-import { CancelPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/cancel-payment-intent-service-impl";
-import { LIST_ALL_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/list-all-payment-intents-repository";
-import { LIST_ALL_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/list-all-payment-intents-service";
-import { ListAllPaymentIntentsServiceImpl } from "@/domain/use-cases/impl/payment-intent/list-all-payment-intents-service-impl";
-import { INCREMENT_AN_AUTHORIZATION_REPOSITORY } from "@/domain/models/contracts/payment-intent/increment-an-authorization-repository";
-import { INCREMENT_AN_AUTHORIZATION_SERVICE } from "@/domain/use-cases/payment-intent/increment-an-authorization-service";
-import { IncrementAnAuthorizationServiceImpl } from "@/domain/use-cases/impl/payment-intent/increment-an-authorization-service-impl";
-import { SEARCH_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/search-payment-intent-repository";
-import { SEARCH_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/search-payment-intent-service";
-import { SearchPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/search-payment-intent-service-impl";
+import { CREATE_SESSION_REPOSITORY } from "@/domain/models/contracts/payment/payment-repository";
+import { CREATE_SESSION_SERVICE } from "@/domain/use-cases/payment/payment-service";
+import { PaymentServiceImpl } from "@/domain/use-cases/impl/payment/payment-service-impl";
+// import { CONFIRM_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/confirm-payment-intent-repository";
+// import { CONFIRM_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/confirm-payment-intent-service";
+// import { ConfirmPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/confirm-payment-intent-service-impl";
+// import { RETRIEVE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/retrieve-payment-intent-repository";
+// import { RETRIEVE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/retrieve-payment-intent-service";
+// import { RetrievePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/retrieve-payment-intent-service-impl";
+// import { UPDATE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/update-payment-intent-repository";
+// import { UPDATE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/update-payment-intent-service";
+// import { UpdatePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/update-payment-intent-service-impl";
+// import { CAPTURE_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/capture-payment-intent-repository";
+// import { CAPTURE_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/capture-payment-intent-service";
+// import { CapturePaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/capture-payment-intent-service-impl";
+// import { CANCEL_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/cancel-payment-intent-repository";
+// import { CANCEL_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/cancel-payment-intent-service";
+// import { CancelPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/cancel-payment-intent-service-impl";
+// import { LIST_ALL_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/list-all-payment-intents-repository";
+// import { LIST_ALL_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/list-all-payment-intents-service";
+// import { ListAllPaymentIntentsServiceImpl } from "@/domain/use-cases/impl/payment-intent/list-all-payment-intents-service-impl";
+// import { INCREMENT_AN_AUTHORIZATION_REPOSITORY } from "@/domain/models/contracts/payment-intent/increment-an-authorization-repository";
+// import { INCREMENT_AN_AUTHORIZATION_SERVICE } from "@/domain/use-cases/payment-intent/increment-an-authorization-service";
+// import { IncrementAnAuthorizationServiceImpl } from "@/domain/use-cases/impl/payment-intent/increment-an-authorization-service-impl";
+// import { SEARCH_PAYMENT_INTENT_REPOSITORY } from "@/domain/models/contracts/payment-intent/search-payment-intent-repository";
+// import { SEARCH_PAYMENT_INTENT_SERVICE } from "@/domain/use-cases/payment-intent/search-payment-intent-service";
+// import { SearchPaymentIntentServiceImpl } from "@/domain/use-cases/impl/payment-intent/search-payment-intent-service-impl";
 
 export const adapters = [
     // User
@@ -61,45 +64,52 @@ export const adapters = [
         provide: UPDATE_USER_REPOSITORY,
         useClass: UserMongooseRepositoryAdapter
     },
+
     // Payment-Intent
     // {
     //     provide: ADD_PAYMENT_INTENT_REPOSITORY,
     //     useClass: PaymentIntentMongooseRepositoryAdapter
     // },
+    // {
+    //     provide: ADD_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: RETRIEVE_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: UPDATE_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: CONFIRM_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: CAPTURE_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: CANCEL_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: LIST_ALL_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: INCREMENT_AN_AUTHORIZATION_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+    // {
+    //     provide: SEARCH_PAYMENT_INTENT_REPOSITORY,
+    //     useClass: StripeAdapter
+    // },
+
+    // Payment
     {
-        provide: ADD_PAYMENT_INTENT_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: RETRIEVE_PAYMENT_INTENT_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: UPDATE_PAYMENT_INTENT_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: CONFIRM_PAYMENT_INTENT_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: CAPTURE_PAYMENT_INTENT_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: CANCEL_PAYMENT_INTENT_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: LIST_ALL_PAYMENT_INTENT_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: INCREMENT_AN_AUTHORIZATION_REPOSITORY,
-        useClass: StripeAdapter
-    },
-    {
-        provide: SEARCH_PAYMENT_INTENT_REPOSITORY,
+        provide: CREATE_SESSION_REPOSITORY,
         useClass: StripeAdapter
     },
 ];
@@ -122,41 +132,48 @@ export const services = [
         provide: UPDATE_USER_SERVICE,
         useClass: UpdateUserServiceImpl
     },
+
     // Payment-Intent
+    // {
+    //     provide: ADD_PAYMENT_INTENT_SERVICE,
+    //     useClass: AddPaymentIntentServiceImpl
+    // },
+    // {
+    //     provide: RETRIEVE_PAYMENT_INTENT_SERVICE,
+    //     useClass: RetrievePaymentIntentServiceImpl
+    // },
+    // {
+    //     provide: UPDATE_PAYMENT_INTENT_SERVICE,
+    //     useClass: UpdatePaymentIntentServiceImpl
+    // },
+    // {
+    //     provide: CONFIRM_PAYMENT_INTENT_SERVICE,
+    //     useClass: ConfirmPaymentIntentServiceImpl
+    // },
+    // {
+    //     provide: CAPTURE_PAYMENT_INTENT_SERVICE,
+    //     useClass: CapturePaymentIntentServiceImpl
+    // },
+    // {
+    //     provide: CANCEL_PAYMENT_INTENT_SERVICE,
+    //     useClass: CancelPaymentIntentServiceImpl
+    // },
+    // {
+    //     provide: LIST_ALL_PAYMENT_INTENT_SERVICE,
+    //     useClass: ListAllPaymentIntentsServiceImpl
+    // },
+    // {
+    //     provide: INCREMENT_AN_AUTHORIZATION_SERVICE,
+    //     useClass: IncrementAnAuthorizationServiceImpl
+    // },
+    // {
+    //     provide: SEARCH_PAYMENT_INTENT_SERVICE,
+    //     useClass: SearchPaymentIntentServiceImpl
+    // },
+
+    // Payment
     {
-        provide: ADD_PAYMENT_INTENT_SERVICE,
-        useClass: AddPaymentIntentServiceImpl
-    },
-    {
-        provide: RETRIEVE_PAYMENT_INTENT_SERVICE,
-        useClass: RetrievePaymentIntentServiceImpl
-    },
-    {
-        provide: UPDATE_PAYMENT_INTENT_SERVICE,
-        useClass: UpdatePaymentIntentServiceImpl
-    },
-    {
-        provide: CONFIRM_PAYMENT_INTENT_SERVICE,
-        useClass: ConfirmPaymentIntentServiceImpl
-    },
-    {
-        provide: CAPTURE_PAYMENT_INTENT_SERVICE,
-        useClass: CapturePaymentIntentServiceImpl
-    },
-    {
-        provide: CANCEL_PAYMENT_INTENT_SERVICE,
-        useClass: CancelPaymentIntentServiceImpl
-    },
-    {
-        provide: LIST_ALL_PAYMENT_INTENT_SERVICE,
-        useClass: ListAllPaymentIntentsServiceImpl
-    },
-    {
-        provide: INCREMENT_AN_AUTHORIZATION_SERVICE,
-        useClass: IncrementAnAuthorizationServiceImpl
-    },
-    {
-        provide: SEARCH_PAYMENT_INTENT_SERVICE,
-        useClass: SearchPaymentIntentServiceImpl
+        provide: CREATE_SESSION_SERVICE,
+        useClass: PaymentServiceImpl
     },
 ]
