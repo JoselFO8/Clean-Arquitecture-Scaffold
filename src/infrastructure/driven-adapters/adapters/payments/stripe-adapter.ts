@@ -6,8 +6,7 @@ import { AddSessionParams, SessionModel } from "@/domain/models/session"
 import axios from "axios"
 import QueryString from "qs"
 
-export class StripeAdapter implements 
-    IPaymentRepository
+export class StripeAdapter implements IPaymentRepository
 {
     // Implementation
     constructor (
@@ -26,7 +25,7 @@ export class StripeAdapter implements
      * @returns Objeto session | error
      */
     // async createSessionRepository(body: AddSessionParams): Promise<SessionModel> {
-    async createSessionRepository(body: AddSessionParams): Promise<any> {
+    async createSessionRepository(body: AddSessionParams): Promise<SessionModel> {
         const createSession = await axios.post(
             `https://api.stripe.com/v1/financial_connections/sessions`,
             QueryString.stringify(body),
@@ -35,6 +34,19 @@ export class StripeAdapter implements
         return createSession.data
     }
 
+    /**
+     * Recuperar session
+     * Enviar secret key
+     * @param id Recibe id de la session
+     * @returns Objeto session | error
+     */
+    async retrieveSessionRepository(id: SessionModel): Promise<SessionModel> {
+        const retrieveSession = await axios.get(
+            `https://api.stripe.com/v1/financial_connections/sessions/${id.id}`,
+            this.config
+        )
+        return retrieveSession.data
+    }
 
     // -------------------------- BORRAR -------------------------- // 
 
