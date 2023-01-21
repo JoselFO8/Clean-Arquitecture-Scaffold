@@ -1,7 +1,6 @@
 import { API_KEY } from "@/application/config/environment"
 import { IPaymentRepository } from "@/domain/models/contracts/payment/payment-repository"
-
-import { PaymentIntentModel } from "@/domain/models/payment-intent"
+import { AddCustomerBalanceTransactionParams, CustomerBalanceTransactionModel } from "@/domain/models/customer-balance-transaction"
 import { AddSessionParams, SessionModel } from "@/domain/models/session"
 import axios from "axios"
 import QueryString from "qs"
@@ -17,15 +16,16 @@ export class StripeAdapter implements IPaymentRepository
         this.stripeUrl = "https://api.stripe.com/v1"
     }
     
-    // https://api.stripe.com/v1/financial_connections/sessions
+    // SESIION
+    
     /**
      * Crear session
      * Enviar secret key
      * @param body Recibe parametros por body
      * @returns Objeto session | error
      */
-    // async createSessionRepository(body: AddSessionParams): Promise<SessionModel> {
     async createSessionRepository(body: AddSessionParams): Promise<SessionModel> {
+        console.log("Desde createSessionRepository");
         const createSession = await axios.post(
             `https://api.stripe.com/v1/financial_connections/sessions`,
             QueryString.stringify(body),
@@ -41,6 +41,7 @@ export class StripeAdapter implements IPaymentRepository
      * @returns Objeto session | error
      */
     async retrieveSessionRepository(id: SessionModel): Promise<SessionModel> {
+        console.log("Desde retrieveSessionRepository");
         const retrieveSession = await axios.get(
             `https://api.stripe.com/v1/financial_connections/sessions/${id.id}`,
             this.config
@@ -48,163 +49,73 @@ export class StripeAdapter implements IPaymentRepository
         return retrieveSession.data
     }
 
-    // -------------------------- BORRAR -------------------------- // 
+    // CUSTOMER BALANCE TRANSACTION
 
-    // /**
-    //  * Crear intento de pago
-    //  * Enviar secret key
-    //  * @param data Recibe parametros por body para crear intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async addPaymentIntentRepository(data: PaymentIntentModel): Promise<any> {
-    //     const newPaymentIntent = await axios.post(
-    //         `${this.stripeUrl}/payment_intents`,
-    //         QueryString.stringify(data),
-    //         this.config
-    //     )
-    //     return newPaymentIntent.data
-    // }
-
-    // /**
-    //  * Recuperar un intento de pago
-    //  * Enviar secret key
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async retrievePaymentIntentRepository(id: any): Promise<any> {
-    //     const retrievePaymentIntent = await axios.get(
-    //         `${this.stripeUrl}/payment_intents/${id.id}`,
-    //         this.config
-    //     )
-    //     return retrievePaymentIntent.data
-    // }
-
-    // /**
-    //  * Actualizar intento de pago
-    //  * Enviar secret key
-    //  * @param body Recibe parametros por body a actualizar
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago actualizado | error
-    //  */
-    // async updatePaymentIntentRepository(body: PaymentIntentModel, id: PaymentIntentModel): Promise<PaymentIntentModel> {
-    //     console.log(body, id.id);
+    /**
+     * Crear customer balance transaction
+     * Enviar secret key
+     * @param body Recibe parametros por body
+     * @param id customer balance transaction ID
+     * @returns Customer balance transaction object | error
+     */
+    async createCustomerBalanceTransactionRepository(body: AddCustomerBalanceTransactionParams, id: CustomerBalanceTransactionModel): Promise<CustomerBalanceTransactionModel> {
+        console.log("Desde createCustomerBalanceTransactionRepository");
         
-    //     const updatePaymentIntent = await axios.post(
-    //         `${this.stripeUrl}/payment_intents/${id.id}`,
-    //         QueryString.stringify(body),
-    //         this.config
-    //     )
-    //     return updatePaymentIntent.data
-    // }
+        const createCustomerBalanceTransaction = await axios.post(
+            `https://api.stripe.com/v1/customers/${id.id}/balance_transactions`,
+            QueryString.stringify(body),
+            this.config
+        )
+        return createCustomerBalanceTransaction.data
+    }
 
-    // /**
-    //  * Confirmar intento de pago
-    //  * Enviar secret key
-    //  * @param body Recibe forma de pago por body
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async confirmPaymentIntentRepository(body: any, id: any): Promise<any> {
-    //     const confirmPaymentIntent = await axios.post(
-    //         `${this.stripeUrl}/payment_intents/${id.id}/confirm`,
-    //         QueryString.stringify(body),
-    //         this.config
-    //     )
-    //     return confirmPaymentIntent.data
-    // }
-    
-    // /**
-    //  * Capturar intento de pago
-    //  * Enviar secret key
-    //  * @param body Recibe parametros para la captura por body
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async capturePaymentIntentRepository(body: any, id: any): Promise<any> {
-    //     const capturePaymentIntent = await axios.post(
-    //         `${this.stripeUrl}/payment_intents/${id.id}`,
-    //         QueryString.stringify(body),
-    //         this.config
-    //     )
-    //     return capturePaymentIntent.data
-    // }
-
-    // /**
-    //  * Capturar intento de pago
-    //  * Enviar secret key
-    //  * @param body Recibe parametros para la captura por body
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async cancelPaymentIntentRepository(body: any, id: any): Promise<any> {
-    //     const cancelPaymentIntent = await axios.post(
-    //         `${this.stripeUrl}/payment_intents/${id.id}/cancel`,
-    //         QueryString.stringify(body),
-    //         this.config
-    //     )
-    //     return cancelPaymentIntent.data
-    // }
-
-    // // https://api.stripe.com/v1/payment_intents
-
-    // // CORREGIR MEDIANTE UNAFUNCION QUE DETERMINE EL QUERY Q LLEGA
-
-    // /**
-    //  * Capturar intento de pago
-    //  * Enviar secret key
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async listAllPaymentIntentRepository(query: any): Promise<any> {
-    //     console.log({query});
+    /**
+     * Recuperar una Customer Balance Transaction
+     * @param id Customer Balance Transaction ID
+     * @param customer Customer ID
+     * @returns Customer balance transaction object | error
+     */
+    async retrieveCustomerBalanceTransactionRepository(query: CustomerBalanceTransactionModel): Promise<any> {
         
-    //     const listAllPaymentIntent = await axios.get(
-    //         `${this.stripeUrl}/payment_intents${!query && query.limit ? "" : `?limit=${query.limit}` }`,
-    //         this.config
-    //     )
-    //     return listAllPaymentIntent.data
-    // }
+        const retrieveCustomerBalanceTransaction = await axios.get(
+            `https://api.stripe.com/v1/customers/${query.customer}/balance_transactions/${query.id}`,
+            this.config
+        )
+        return retrieveCustomerBalanceTransaction.data
+    }
 
-    // // https://api.stripe.com/v1/payment_intents/pi_1DsvJ12eZvKYlo2CXq3aSyxd/increment_authorization
-    
-    // // async incrementAnAutorizationRepository(query: any): Promise<any> {
-    // /**
-    //  * Confirmar intento de pago
-    //  * Enviar secret key
-    //  * @param body Recibe forma de pago por body
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async incrementAnAutorizationRepository(body: any, id: any): Promise<any> {
-    //     const incrementAnAutorization = await axios.post(
-    //         `${this.stripeUrl}/payment_intents/${id.id}/increment_authorization`,
-    //         QueryString.stringify(body),
-    //         this.config
-    //     )
-    //     return incrementAnAutorization.data
-    // }
+    /**
+     * 
+     * @param body 
+     * @param query 
+     * @returns 
+     */
+    async updateCustomerBalanceTransactionRepository(body: any, query: CustomerBalanceTransactionModel): Promise<any> {
+        console.log("desde updateCustomerBalanceTransactionRepository", {body, query});
+        const updateCustomerBalanceTransaction = await axios.post(
+            `https://api.stripe.com/v1/customers/${query.customer}/balance_transactions/${query.id}`,
+            QueryString.stringify(body),
+            this.config
+        )
+        return updateCustomerBalanceTransaction.data
+    }
 
-    // // https://api.stripe.com/v1/payment_intents/search
-    // /**
-    //  * Capturar intento de pago
-    //  * Enviar secret key
-    //  * @param id Recibe id especifico de intento de pago
-    //  * @returns Objeto intento de pago | error
-    //  */
-    // async searchPaymentIntentRepository(query: any): Promise<any> {
-    //     // console.log(`${this.stripeUrl}/payment_intents/search${query}`);
-        
-    //     // De objeto a query strings
-    //     console.log(QueryString.stringify(query));
-        
-    //     const searchPaymentIntent = await axios.get(
-    //         // `${this.stripeUrl}/payment_intents/search${query ? `?${query}` : ""}`,
-    //         `${this.stripeUrl}/payment_intents/search?query=status:'succeeded'`,
-    //         this.config
-    //     )
-    //     return searchPaymentIntent.data
-    //     // return "pruebas desde searchPaymentIntentRepository"
-    // }
-
-    
+    // CORREGIR SEGUN POSIBLES PARAMETROS
+    // CORREGIR - CREAR FUNCION PARA PARSEAR DE URLENCODE A urlstring
+    /**
+     * 
+     * @param query 
+     * @returns 
+     */
+    async listCustomerBalanceTransactionRepository(id: any, query: any): Promise<any> {
+        // https://api.stripe.com/v1/customers/cus_NCmG8aDxP5GDda/balance_transactions?limit=2
+        console.log("desde listCustomerBalanceTransactionRepository", id.id,query.limit);
+        const listCustomerBalanceTransaction = await axios.get(
+            `https://api.stripe.com/v1/customers/${id.id}/balance_transactions${query && query.limit ? `?limit=${query.limit}` : ""}`,
+            // "https://api.stripe.com/v1/customers/cus_NCmG8aDxP5GDda/balance_transactions?limit=2",
+            // QueryString.stringify(body),
+            this.config
+        )
+        return listCustomerBalanceTransaction.data
+    }
 }
