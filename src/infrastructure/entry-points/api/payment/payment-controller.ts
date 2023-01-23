@@ -2,6 +2,7 @@ import { AddCustomerBalanceTransactionParams, CustomerBalanceTransactionModel } 
 import { ResponseSession, SessionModel } from "@/domain/models/session";
 import { CREATE_CUSTOMER_BALANCE_TRANSACTION_SERVICE, CREATE_SESSION_SERVICE, IPaymentService, LIST_CUSTOMER_BALANCE_TRANSACTION_SERVICE, RETRIEVE_CUSTOMER_BALANCE_TRANSACTION_SERVICE, RETRIEVE_SESSION_SERVICE, UPDATE_CUSTOMER_BALANCE_TRANSACTION_SERVICE } from "@/domain/use-cases/payment/payment-service";
 import {Adapter, Body, Get, Mapping, Param, Post, Query} from "@tsclean/core";
+import { MiddlewareDePrueba } from "../../helpers/decorators/prueba";
 
 @Mapping('payment')
 export class PaymentController {
@@ -22,6 +23,7 @@ export class PaymentController {
      * @returns Objeto session | error
      */
     @Post('/session/create')
+    @MiddlewareDePrueba()
     // async createSessionController(@Body() body: SessionModel): Promise<ResponseSession> {
     async createSessionController(@Body() body: SessionModel): Promise<any> {
         try {

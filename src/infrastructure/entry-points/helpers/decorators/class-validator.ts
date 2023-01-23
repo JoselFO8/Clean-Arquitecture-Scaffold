@@ -1,21 +1,9 @@
-import { AddUserParams } from "@/domain/models/user";
-import { ClassValidatorAdapter } from "@/infrastructure/driven-adapters/adapters/orm/mongoose/class-validator-adapter";
+import { ClassValidatorAdapter } from "@/infrastructure/driven-adapters/adapters/class-valitator/class-validator-adapter";
 import { AccessResource, applyDecorators } from "@tsclean/core";
-import { MinLength, MaxLength, IsEmail } from "class-validator";
+// import { MinLength, MaxLength, IsEmail } from "class-validator";
 
 
-export function MiddlewareValidatorInsertData(data: AddUserParams) {
-    // return applyDecorators(AccessResource(new ClassValidatorAdapter))
+export function MiddlewareValidatorInsertData() {
     console.log("Prueba desde MiddlewareValidatorInsertData");
-    
-    // return true
+    return applyDecorators(AccessResource(new ClassValidatorAdapter()))
 }
-
-// export class validatorInsertData {
-//     @MinLength (3)
-//     @MaxLength(15)
-//     name: string;
-
-//     @IsEmail()
-//     email: string
-// }
